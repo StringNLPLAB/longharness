@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+scores.json
+
+# The project-level ignore file excludes HTML reports; keep the public site.
+!docs/index.html
+
+# The complete dataset is published on Hugging Face, not committed to GitHub.
+manifest.jsonl
+DATA_CHECKSUMS.sha256
+tasks/*/manifest.jsonl
+tasks/*/contexts/*
+tasks/*/answers/*
+
+# Keep two complete examples from every task in the GitHub repository.
+!tasks/*/contexts/sample-00000.md
+!tasks/*/contexts/sample-00001.md
+!tasks/*/answers/sample-00000.json
+!tasks/*/answers/sample-00001.json

@@ -1,0 +1,30 @@
+{
+  "benchmark": "LongHarness",
+  "examples": 8,
+  "examples_manifest_sha256": "41ed203f1cf15bbe3c59741610e18a95899d7cd781f6a1f667697e7c8df8ab02",
+  "instances": 200,
+  "manifest_sha256": "28b7f2418982db028427f35fd79a119acf83b4a7c254b2ee69c9162e0c01df9a",
+  "paper_task_names": {
+    "constraint-solving-search": "Constraint Solving Search",
+    "equivalent-program-pair-search": "Equivalent Program Pair Search",
+    "outlier-memo-detection": "Outlier Memo Detection",
+    "program-execution-tracing": "Program Execution Tracing"
+  },
+  "schema_version": 1,
+  "sources": {
+    "constraint-solving-search": "commonsense-constraints-v1-50",
+    "equivalent-program-pair-search": "code-only-v3-screened-clarified-query-50",
+    "outlier-memo-detection": [
+      "v5.9.1",
+      "v5.9.1.cont"
+    ],
+    "program-execution-tracing": "notebook-export-v18-128k-python-50"
+  },
+  "task_manifest_sha256": {
+    "constraint-solving-search": "ffb06ee2c81db7e8c2fc8a6396ca8b9b77c51250519eb0d5b66c80e4fbde8be7",
+    "equivalent-program-pair-search": "77075ad019e6aa5a5220c11ce9b02614aa79d9b6d60ca5a1ffaf80f84dc9096e",
+    "outlier-memo-detection": "216d5009472a1441981145859b0bba6fb445b700cf7a8a1914d807c188608142",
+    "program-execution-tracing": "184fb3d23838938a6958db16ed258ed086b973e54c9f1d70ea883fcb45d04975"
+  },
+  "tasks": 4
+}

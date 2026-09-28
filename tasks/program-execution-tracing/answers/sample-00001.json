@@ -1,0 +1,49 @@
+{
+  "answer": {
+    "aa": [
+      "auth",
+      "db",
+      "cache",
+      "jobs",
+      "proxy",
+      "api",
+      "worker",
+      "ui"
+    ],
+    "bb": [
+      [
+        "auth",
+        "db"
+      ],
+      [
+        "cache",
+        "jobs",
+        "proxy"
+      ],
+      [
+        "api",
+        "worker"
+      ],
+      [
+        "ui"
+      ]
+    ],
+    "cc": [
+      "auth",
+      "db"
+    ],
+    "dd": 8
+  },
+  "evidence": [
+    20,
+    45,
+    86,
+    155,
+    165,
+    220,
+    260,
+    305
+  ],
+  "schema_version": 1,
+  "task": "program-execution-tracing"
+}

@@ -1,0 +1,26 @@
+{
+  "expected_pairs": [
+    [
+      39,
+      49
+    ],
+    [
+      44,
+      89
+    ],
+    [
+      53,
+      156
+    ],
+    [
+      121,
+      152
+    ],
+    [
+      161,
+      168
+    ]
+  ],
+  "schema_version": 1,
+  "task": "equivalent-program-pair-search"
+}

@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LongHarness evaluates the accuracy and efficiency of language-model harnesses on demanding long-context reasoning tasks.">
+  <meta name="theme-color" content="#eef2f0">
+  <title>LongHarness | Long-context harness evaluation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero" id="top">
+    <nav class="site-nav wrap" aria-label="Primary navigation">
+      <a class="wordmark" href="#top">LongHarness</a>
+      <div class="nav-links">
+        <a href="#results">Results</a>
+        <a href="#tasks">Tasks</a>
+        <a href="#access">Dataset</a>
+        <a href="#citation">Citation</a>
+      </div>
+    </nav>
+
+    <div class="hero-content wrap">
+      <p class="eyebrow">StringNLP Lab · University of Alberta</p>
+      <h1>LongHarness</h1>
+      <p class="tagline">Stress-testing language model harnesses for long-context reasoning</p>
+      <p class="hero-summary">
+        Four tasks expose whether a harness can retrieve selectively, adapt its
+        reasoning as new information appears, and trade additional computation
+        for meaningful accuracy gains.
+      </p>
+
+      <p class="authors">
+        Quang Hieu Pham<sup>*</sup> · Thuy Duong Nguyen<sup>*</sup> ·
+        Jocelyn Qiaochu Chen<sup>†</sup> · Xi Ye<sup>†</sup>
+      </p>
+      <p class="affiliations">
+        University of Alberta · Alberta Machine Intelligence Institute (Amii) ·
+        <sup>*</sup>Equal contribution · <sup>†</sup>Equal advising
+      </p>
+
+      <div class="hero-actions" aria-label="Project resources">
+        <a class="button button-primary" href="https://huggingface.co/datasets/StringNLP/longharness">Dataset</a>
+        <a class="button button-secondary" href="https://github.com/stringnlplab/longharness">GitHub</a>
+        <a class="button button-secondary" href="#citation">Paper forthcoming</a>
+      </div>
+
+      <dl class="hero-stats" aria-label="Benchmark summary">
+        <div><dt>4</dt><dd>task suites</dd></div>
+        <div><dt>200</dt><dd>instances</dd></div>
+        <div><dt>~128K</dt><dd>tokens each</dd></div>
+        <div><dt>25</dt><dd>frontier model–harness combinations tested</dd></div>
+      </dl>
+    </div>
+  </header>
+
+  <main>
+    <section class="section intro-section" aria-labelledby="overview-title">
+      <div class="wrap intro-grid">
+        <div>
+          <p class="section-label">Why LongHarness</p>
+          <h2 id="overview-title">Accuracy alone hides how a harness handles context.</h2>
+        </div>
+        <div class="intro-copy">
+          <p>
+            Modern harnesses extend language models with search, context slicing,
+            tool use, and additional model calls. Existing benchmarks often reveal
+            little about whether those mechanisms are being used strategically.
+          </p>
+          <p>
+            LongHarness combines dense, confusable evidence with reasoning paths
+            that change as intermediate results are recovered. Multiple strategies
+            can succeed, but their token and monetary costs differ sharply.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section results-section" id="results" aria-labelledby="results-title">
+      <div class="wrap">
+        <div class="section-heading">
+          <div>
+            <p class="section-label">Harness separation</p>
+            <h2 id="results-title">LongHarness reveals harness differences that existing benchmarks hide.</h2>
+          </div>
+          <p class="key-finding">
+            LongHarness reveals <strong>bigger differences between harnesses</strong>
+            and shows that similar accuracy can come at a
+            <strong>dramatically different cost</strong>.
+          </p>
+        </div>
+
+        <figure class="figure-wide">
+          <img src="assets/model-comparison.png" alt="GPT-5.6-sol harness accuracy across LongBench-v2, OOLONG-Synth, and LongHarness, followed by an accuracy-cost comparison of mini-swe-agent and RLM.">
+          <figcaption>
+            Strict accuracy and mean per-instance cost for GPT-5.6-sol
+            under four agent harnesses.
+          </figcaption>
+        </figure>
+
+        <div class="table-header">
+          <h3>Macro-average accuracy</h3>
+          <p>Percent across the four LongHarness task suites. Best result in bold.</p>
+        </div>
+        <div class="table-scroll" role="region" aria-label="Macro-average exact accuracy table" tabindex="0">
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th scope="col">Model</th>
+                <th scope="col">Direct Reading</th>
+                <th scope="col">RLM</th>
+                <th scope="col">OpenCode</th>
+                <th scope="col">mini-swe-agent</th>
+                <th scope="col">ReAct</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">GPT-5.6-sol</th><td>60.0</td><td>53.5</td><td>40.5</td><td class="best"><strong>68.0</strong></td><td>43.0</td></tr>
+              <tr><th scope="row">GLM-5.3</th><td>9.5</td><td>27.0</td><td>38.0</td><td>42.5</td><td>13.0</td></tr>
+              <tr><th scope="row">Qwen3.8-27B</th><td>0.0</td><td>7.5</td><td>38.5</td><td>33.0</td><td>0.0</td></tr>
+              <tr><th scope="row">Gemini 3.8 Flash</th><td>10.0</td><td>10.5</td><td>11.5</td><td>25.0</td><td>21.0</td></tr>
+              <tr><th scope="row">Kimi-K2.6</th><td>0.0</td><td>0.5</td><td>1.5</td><td>0.5</td><td>0.0</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section principles-section" aria-labelledby="principles-title">
+      <div class="wrap">
+        <p class="section-label">Benchmark design</p>
+        <h2 id="principles-title">LongHarness combines properties that existing benchmarks cover only partially.</h2>
+        <div class="benchmark-table-scroll" role="region" aria-label="Comparison of long-context benchmarks" tabindex="0">
+          <table class="benchmark-comparison">
+            <caption>Comparison of long-context benchmarks along properties relevant to evaluating language-model harnesses.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Evaluation property</th>
+                <th scope="col">LongBench-v2</th>
+                <th scope="col">HELMET</th>
+                <th scope="col">LongProc</th>
+                <th scope="col">OOLONG</th>
+                <th scope="col">LongHarness</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Diverse, adaptive retrieval demand</th>
+                <td><span class="status partial" aria-label="Partially supported">~</span></td>
+                <td><span class="status partial" aria-label="Partially supported">~</span></td>
+                <td><span class="status absent" aria-label="Not supported">&times;</span></td>
+                <td><span class="status absent" aria-label="Not supported">&times;</span></td>
+                <td><span class="status supported" aria-label="Supported">&#10003;</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Semantically confusable evidence</th>
+                <td><span class="status absent" aria-label="Not supported">&times;</span></td>
+                <td><span class="status supported" aria-label="Supported">&#10003;</span></td>
+                <td><span class="status partial" aria-label="Partially supported">~</span></td>
+                <td><span class="status partial" aria-label="Partially supported">~</span></td>
+                <td><span class="status supported" aria-label="Supported">&#10003;</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Extensive reasoning steps</th>
+                <td><span class="status absent" aria-label="Not supported">&times;</span></td>
+                <td><span class="status absent" aria-label="Not supported">&times;</span></td>
+                <td><span class="status supported" aria-label="Supported">&#10003;</span></td>
+                <td><span class="status supported" aria-label="Supported">&#10003;</span></td>
+                <td><span class="status supported" aria-label="Supported">&#10003;</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Step-dependent retrieval</th>
+                <td><span class="status absent" aria-label="Not supported">&times;</span></td>
+                <td><span class="status absent" aria-label="Not supported">&times;</span></td>
+                <td><span class="status supported" aria-label="Supported">&#10003;</span></td>
+                <td><span class="status absent" aria-label="Not supported">&times;</span></td>
+                <td><span class="status supported" aria-label="Supported">&#10003;</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Multiple strategies with different costs</th>
+                <td><span class="status absent" aria-label="Not supported">&times;</span></td>
+                <td><span class="status partial" aria-label="Partially supported">~</span></td>
+                <td><span class="status absent" aria-label="Not supported">&times;</span></td>
+                <td><span class="status partial" aria-label="Partially supported">~</span></td>
+                <td><span class="status supported" aria-label="Supported">&#10003;</span></td>
+              </tr>
+              <tr class="outcome-start">
+                <th scope="row">Wide range of SoTA system accuracy</th>
+                <td><span class="status absent" aria-label="Not supported">&times;</span></td>
+                <td><span class="status absent" aria-label="Not supported">&times;</span></td>
+                <td><span class="status absent" aria-label="Not supported">&times;</span></td>
+                <td><span class="status absent" aria-label="Not supported">&times;</span></td>
+                <td><span class="status supported" aria-label="Supported">&#10003;</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Wide range of SoTA system cost</th>
+                <td><span class="status absent" aria-label="Not supported">&times;</span></td>
+                <td><span class="status absent" aria-label="Not supported">&times;</span></td>
+                <td><span class="status absent" aria-label="Not supported">&times;</span></td>
+                <td><span class="status partial" aria-label="Partially supported">~</span></td>
+                <td><span class="status supported" aria-label="Supported">&#10003;</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="benchmark-legend" aria-label="Table symbol legend">
+          <span><strong class="status supported">&#10003;</strong> Supported</span>
+          <span><strong class="status partial">~</strong> Partially supported</span>
+          <span><strong class="status absent">&times;</strong> Not supported</span>
+        </div>
+        <p class="principles-note">
+          Adaptive retrieval means choosing among lexical search, semantic retrieval, and direct reading as information needs change. Step-dependent retrieval means intermediate findings determine what must be retrieved next. The final two rows report whether model–harness configurations are widely separated in accuracy and cost.
+        </p>
+      </div>
+    </section>
+
+    <section class="section tasks-section" id="tasks" aria-labelledby="tasks-title">
+      <div class="wrap">
+        <div class="section-heading">
+          <div>
+            <p class="section-label">Four task suites</p>
+            <h2 id="tasks-title">Different context access strategies expose different harness strengths.</h2>
+          </div>
+          <p>
+            Every suite contains 50 instances with deterministic exact-match
+            evaluation and contexts near the 128K-token range.
+          </p>
+        </div>
+
+        <div class="task-tabs" role="tablist" aria-label="LongHarness tasks">
+          <button class="task-tab active" id="tab-constraints" role="tab" aria-selected="true" aria-controls="panel-constraints" data-panel="constraints">Constraint search</button>
+          <button class="task-tab" id="tab-pairs" role="tab" aria-selected="false" aria-controls="panel-pairs" data-panel="pairs">Program pairs</button>
+          <button class="task-tab" id="tab-tracing" role="tab" aria-selected="false" aria-controls="panel-tracing" data-panel="tracing">Execution tracing</button>
+          <button class="task-tab" id="tab-memos" role="tab" aria-selected="false" aria-controls="panel-memos" data-panel="memos">Outlier memos</button>
+        </div>
+
+        <div class="task-panel active" id="panel-constraints" role="tabpanel" aria-labelledby="tab-constraints">
+          <div class="task-number">01</div>
+          <div>
+            <h3>Constraint Solving Search</h3>
+            <p>
+              Find every person satisfying three to five conditions using facts
+              scattered across varied documents. Near-matches satisfy all but one
+              condition, and the most selective condition is not identified.
+            </p>
+          </div>
+          <dl class="task-facts">
+            <div><dt>Context</dt><dd>~2,400 documents about 160 people</dd></div>
+            <div><dt>Answer</dt><dd>5 person IDs</dd></div>
+            <div><dt>Strategy</dt><dd>Narrow, then verify</dd></div>
+          </dl>
+          <figure class="task-figure">
+            <a class="task-demo-link" href="assets/task-constraint.png" target="_blank" rel="noopener" aria-label="Open the Constraint Solving Search example at full resolution">
+              <img src="assets/task-constraint.png" alt="Constraint Solving Search example with supporting facts, distractors, a multi-condition query, and correct and mistaken traces.">
+            </a>
+            <figcaption>Constraint Solving Search: combine supporting facts while rejecting plausible near-matches.</figcaption>
+          </figure>
+        </div>
+
+        <div class="task-panel" id="panel-pairs" role="tabpanel" aria-labelledby="tab-pairs" hidden>
+          <div class="task-number">02</div>
+          <div>
+            <h3>Equivalent Program Pair Search</h3>
+            <p>
+              Recover every functionally equivalent pair among anonymous Python
+              programs. True pairs can look different, while nearby mutants share
+              surface structure but diverge on boundary behavior.
+            </p>
+          </div>
+          <dl class="task-facts">
+            <div><dt>Context</dt><dd>200 programs</dd></div>
+            <div><dt>Answer</dt><dd>5 unordered pairs</dd></div>
+            <div><dt>Strategy</dt><dd>Cluster, then distinguish</dd></div>
+          </dl>
+          <figure class="task-figure">
+            <a class="task-demo-link" href="assets/task-pairs.png" target="_blank" rel="noopener" aria-label="Open the Equivalent Program Pair Search example at full resolution">
+              <img src="assets/task-pairs.png" alt="Equivalent Program Pair Search example with semantically matching programs and deceptively similar distractors.">
+            </a>
+            <figcaption>Equivalent Program Pair Search: identify semantic matches rather than surface-level similarity.</figcaption>
+          </figure>
+        </div>
+
+        <div class="task-panel" id="panel-tracing" role="tabpanel" aria-labelledby="tab-tracing" hidden>
+          <div class="task-number">03</div>
+          <div>
+            <h3>Program Execution Tracing</h3>
+            <p>
+              Follow an eight-step dependent query through shuffled records of
+              prior computations. Each recovered output determines what must be
+              found next, and one incorrect match redirects the remaining trace.
+            </p>
+          </div>
+          <dl class="task-facts">
+            <div><dt>Context</dt><dd>320 code cells</dd></div>
+            <div><dt>Answer</dt><dd>Final result + 8 supporting cell IDs, one per query step</dd></div>
+            <div><dt>Strategy</dt><dd>Retrieve, verify, reuse</dd></div>
+          </dl>
+          <figure class="task-figure">
+            <a class="task-demo-link" href="assets/task-tracing.png" target="_blank" rel="noopener" aria-label="Open the Program Execution Tracing example at full resolution">
+              <img src="assets/task-tracing.png" alt="Program Execution Tracing example where one recovered result determines the next relevant code cell.">
+            </a>
+            <figcaption>Program Execution Tracing: recover dependent intermediate values in the correct order.</figcaption>
+          </figure>
+        </div>
+
+        <div class="task-panel" id="panel-memos" role="tabpanel" aria-labelledby="tab-memos" hidden>
+          <div class="task-number">04</div>
+          <div>
+            <h3>Outlier Memo Detection</h3>
+            <p>
+              Identify memos whose claims conflict with relationships established
+              elsewhere. No outlier is contradictory in isolation, so agents must
+              build and reuse a global representation of the packet.
+            </p>
+          </div>
+          <dl class="task-facts">
+            <div><dt>Context</dt><dd>700 memos</dd></div>
+            <div><dt>Answer</dt><dd>15 memo IDs</dd></div>
+            <div><dt>Strategy</dt><dd>Structure, then reconcile</dd></div>
+          </dl>
+          <figure class="task-figure">
+            <a class="task-demo-link" href="assets/task-memos.png" target="_blank" rel="noopener" aria-label="Open the Outlier Memo Detection example at full resolution">
+              <img src="assets/task-memos.png" alt="Outlier Memo Detection example with mutually supporting memos, one contradictory outlier, and a plausible distractor.">
+            </a>
+            <figcaption>Outlier Memo Detection: reconcile distributed claims to isolate the contradiction.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section access-section" id="access" aria-label="Dataset access">
+      <div class="wrap access-linear">
+        <p class="section-label">Dataset access</p>
+        <div class="access-row">
+          <p class="access-summary">
+            The scoring script is available on both GitHub and Hugging Face.
+            GitHub includes two examples per task; Hugging Face adds the complete
+            200-instance release, answer keys, and manifests.
+          </p>
+          <div class="resource-links">
+            <a href="https://github.com/stringnlplab/longharness">GitHub examples</a>
+            <a href="https://huggingface.co/datasets/StringNLP/longharness">Full dataset</a>
+          </div>
+        </div>
+        <div class="download-row">
+          <span class="download-label">Hugging Face CLI</span>
+          <code>hf download StringNLP/longharness --repo-type dataset --local-dir longharness</code>
+          <button type="button" class="copy-command" data-copy="hf download StringNLP/longharness --repo-type dataset --local-dir longharness">Copy</button>
+        </div>
+        <p class="access-note">Private access is required during release preparation.</p>
+      </div>
+    </section>
+
+    <section class="section citation-section" id="citation" aria-labelledby="citation-title">
+      <div class="wrap citation-grid">
+        <div>
+          <p class="section-label">Citation</p>
+          <h2 id="citation-title">Paper forthcoming</h2>
+          <p>The citation below is provisional and will be updated when the preprint is available.</p>
+        </div>
+        <div class="citation-block">
+          <pre id="bibtex"><code>@misc{pham2027longharness,
+  title  = {LongHarness Bench: Stress-Testing Language Model
+            Harnesses for Long-Context Reasoning},
+  author = {Pham, Quang Hieu and Nguyen, Thuy Duong and
+            Chen, Jocelyn Qiaochu and Ye, Xi},
+  year   = {2027},
+  note   = {Manuscript in preparation}
+}</code></pre>
+          <button type="button" class="copy-citation">Copy BibTeX</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <strong>LongHarness</strong>
+        <p>StringNLP Lab · University of Alberta · Amii</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://huggingface.co/datasets/StringNLP/longharness">Dataset</a>
+        <a href="https://github.com/stringnlplab/longharness">GitHub</a>
+        <a href="#top">Back to top</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="site.js"></script>
+</body>
+</html>
