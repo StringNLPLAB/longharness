@@ -81,3 +81,17 @@ python score.py predictions.jsonl \
 
 The primary metric is exact instance accuracy. The scorer also reports
 answer-only accuracy for tasks whose required response includes provenance.
+
+## Citation
+
+The paper is in preparation. In the meantime, please use this provisional
+citation:
+
+```bibtex
+@misc{pham2026longharness,
+  title  = {{LongHarness Bench}: Stress-Testing Language Model Harnesses for Long-Context Reasoning},
+  author = {Pham, Quang Hieu and Nguyen, Thuy Duong and Chen, Jocelyn Qiaochu and Ye, Xi},
+  year   = {2026},
+  note   = {Preprint}
+}
+```
