@@ -10,10 +10,11 @@
   --green: #537f87;
   --green-pale: #eaf2f3;
   --max-width: 1180px;
+  --header-height: 82px;
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 28px; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-height) + 28px); }
 body {
   margin: 0;
   color: var(--ink);
@@ -35,17 +36,17 @@ button:focus-visible, a:focus-visible, [tabindex="0"]:focus-visible {
 button { font: inherit; }
 sup { font-size: .65em; }
 .wrap { width: min(var(--max-width), calc(100% - 80px)); margin-inline: auto; }
-.skip-link { position: absolute; top: -100px; left: 20px; z-index: 10; padding: 12px 20px; background: var(--white); }
+.skip-link { position: fixed; top: -100px; left: 20px; z-index: 10; padding: 12px 20px; background: var(--white); }
 .skip-link:focus { top: 12px; }
 
 /* A quiet masthead, with the finding and its evidence doing the visual work. */
+.site-header { position: sticky; top: 0; z-index: 5; background: var(--white); box-shadow: 0 1px 0 var(--line); }
 .site-nav {
   display: flex;
-  min-height: 82px;
+  min-height: var(--header-height);
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  border-bottom: 1px solid var(--line);
 }
 .wordmark { font-size: 1.06rem; font-weight: 750; letter-spacing: -.035em; text-decoration: none; }
 .wordmark::before { content: ""; display: inline-block; width: 10px; height: 10px; margin-right: 10px; background: var(--accent); }
@@ -84,6 +85,8 @@ sup { font-size: .65em; }
 .button-primary:hover { color: var(--white); background: var(--accent); border-color: var(--accent); }
 .button-secondary { background: transparent; border-color: var(--line-strong); }
 .button-secondary:hover { color: var(--ink); background: var(--white); border-color: var(--ink); }
+.button.nav-repo { min-height: 38px; gap: 8px; padding: 6px 12px; white-space: nowrap; }
+.nav-links .nav-repo:hover { text-decoration: none; }
 .text-link { padding: 10px; font-size: .8rem; text-decoration: none; }
 .text-link:hover { text-decoration: underline; }
 .hero-evidence { min-width: 0; margin: 0; padding: 20px 0 0; border-top: 2px solid var(--ink); }
@@ -235,7 +238,7 @@ tbody tr:last-child > * { border-bottom: 0; }
 .task-panel .walk-card .walk-io { margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--line); font-size: .72rem; color: var(--ink-soft); }
 .walk-card ul { list-style: none; padding: 0; margin: 0; font-size: .81rem; line-height: 1.6; }
 .walk-card li + li { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); }
-.walk-reasoning { position: sticky; top: 24px; min-width: 0; padding: 23px; background: var(--paper); border-top: 2px solid var(--accent); }
+.walk-reasoning { position: sticky; top: calc(var(--header-height) + 24px); min-width: 0; padding: 23px; background: var(--paper); border-top: 2px solid var(--accent); }
 .walk-step-dots { display: flex; gap: 8px; margin: 18px 0; }
 .walk-step-dots button { width: 30px; height: 30px; padding: 0; border: 1px solid var(--line-strong); border-radius: 50%; background: white; color: var(--ink-soft); font-size: .75rem; cursor: pointer; }
 .walk-step-dots button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: white; }
@@ -361,8 +364,8 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
   .access-row { grid-template-columns: 1fr; gap: 20px; }
 }
 @media (max-width: 760px) {
+  :root { --header-height: 68px; }
   .wrap { width: calc(100% - 40px); }
-  .site-nav { min-height: 68px; }
   .nav-links { gap: 17px; }
   .nav-links a { font-size: .73rem; }
   .hero-content { padding-top: 34px; }
@@ -408,12 +411,14 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
   .hero-summary { font-size: 1.05rem; }
   .finding-callout { padding: 23px; }
 }
+@media (max-width: 600px) {
+  :root { --header-height: 100px; }
+  .site-nav { flex-direction: column; align-items: stretch; justify-content: center; gap: 8px; padding-block: 12px; }
+  .nav-links { justify-content: space-between; gap: 8px; }
+}
 @media (max-width: 390px) {
-  .site-nav { gap: 12px; }
   .wordmark { white-space: nowrap; font-size: .9rem; }
   .wordmark::before { width: 8px; height: 8px; margin-right: 8px; }
-  .nav-links { gap: 10px; }
-  .nav-links a:last-child { display: none; }
   .eyebrow { font-size: .58rem; }
   .hero-finding { font-size: 1.3rem; }
   .hero-masthead { gap: 12px; }
