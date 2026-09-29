@@ -1,0 +1,152 @@
+[
+  {
+    "model": "GPT-5.6-sol",
+    "results": [
+      {
+        "harness": "Direct",
+        "accuracy": 60.0,
+        "cost": 0.822
+      },
+      {
+        "harness": "RLM",
+        "accuracy": 53.5,
+        "cost": 4.3
+      },
+      {
+        "harness": "OpenCode",
+        "accuracy": 40.5,
+        "cost": 2.9
+      },
+      {
+        "harness": "mini-swe-agent",
+        "accuracy": 68.0,
+        "cost": 0.816
+      },
+      {
+        "harness": "ReAct",
+        "accuracy": 43.0,
+        "cost": 1.93
+      }
+    ]
+  },
+  {
+    "model": "GLM-5.3",
+    "results": [
+      {
+        "harness": "Direct",
+        "accuracy": 9.5,
+        "cost": 0.948
+      },
+      {
+        "harness": "RLM",
+        "accuracy": 27.0,
+        "cost": 5.48
+      },
+      {
+        "harness": "OpenCode",
+        "accuracy": 38.0,
+        "cost": 3.33
+      },
+      {
+        "harness": "mini-swe-agent",
+        "accuracy": 42.5,
+        "cost": 3.0
+      },
+      {
+        "harness": "ReAct",
+        "accuracy": 13.0,
+        "cost": 3.19
+      }
+    ]
+  },
+  {
+    "model": "Qwen3.8-27B",
+    "results": [
+      {
+        "harness": "Direct",
+        "accuracy": 0.0,
+        "cost": 0.338
+      },
+      {
+        "harness": "RLM",
+        "accuracy": 7.5,
+        "cost": 5.66
+      },
+      {
+        "harness": "OpenCode",
+        "accuracy": 38.5,
+        "cost": 7.06
+      },
+      {
+        "harness": "mini-swe-agent",
+        "accuracy": 33.0,
+        "cost": 5.32
+      },
+      {
+        "harness": "ReAct",
+        "accuracy": 0.0,
+        "cost": 3.87
+      }
+    ]
+  },
+  {
+    "model": "Gemini 3.8 Flash",
+    "results": [
+      {
+        "harness": "Direct",
+        "accuracy": 10.0,
+        "cost": 0.162
+      },
+      {
+        "harness": "RLM",
+        "accuracy": 10.5,
+        "cost": 0.713
+      },
+      {
+        "harness": "OpenCode",
+        "accuracy": 11.5,
+        "cost": 0.471
+      },
+      {
+        "harness": "mini-swe-agent",
+        "accuracy": 25.0,
+        "cost": 0.55
+      },
+      {
+        "harness": "ReAct",
+        "accuracy": 21.0,
+        "cost": 0.54
+      }
+    ]
+  },
+  {
+    "model": "Kimi-K2.6",
+    "results": [
+      {
+        "harness": "Direct",
+        "accuracy": 0.0,
+        "cost": 0.636
+      },
+      {
+        "harness": "RLM",
+        "accuracy": 0.5,
+        "cost": 6.65
+      },
+      {
+        "harness": "OpenCode",
+        "accuracy": 1.5,
+        "cost": 5.65
+      },
+      {
+        "harness": "mini-swe-agent",
+        "accuracy": 0.5,
+        "cost": 4.03
+      },
+      {
+        "harness": "ReAct",
+        "accuracy": 0.0,
+        "cost": 2.86
+      }
+    ]
+  }
+]
