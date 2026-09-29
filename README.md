@@ -1,4 +1,4 @@
-# LongHarness: Stress-Testing Language Model Harnesses for Long-Context Reasoning
+# LongHarness Bench: Stress-Testing Language Model Harnesses for Long-Context Reasoning
 
 LongHarness evaluates how language-model harnesses access and reason over long
 contexts. Its four task suites contain 200 instances that require selective

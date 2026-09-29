@@ -19,7 +19,7 @@ tags:
   - code
 ---
 
-# LongHarness: Stress-Testing Language Model Harnesses for Long-Context Reasoning
+# LongHarness Bench: Stress-Testing Language Model Harnesses for Long-Context Reasoning
 
 LongHarness evaluates how language-model harnesses access and reason over long
 contexts. It is designed to distinguish context-access strategies, including
