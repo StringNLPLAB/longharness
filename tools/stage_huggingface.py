@@ -21,6 +21,15 @@ def copy(relative: str, destination: Path) -> None:
     shutil.copy2(source, target)
 
 
+def copy_as(source_relative: str, destination_relative: str, destination: Path) -> None:
+    source = RELEASE / source_relative
+    if not source.is_file():
+        raise FileNotFoundError(source)
+    target = destination / destination_relative
+    target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(source, target)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("destination", type=Path)
@@ -40,8 +49,9 @@ def main() -> None:
     if len(rows) != 200:
         raise RuntimeError(f"Expected 200 release rows, found {len(rows)}")
 
+    copy_as("DATASET_CARD.md", "README.md", destination)
+
     fixed = [
-        "README.md",
         "RELEASE.json",
         "manifest.jsonl",
         "examples-manifest.jsonl",
