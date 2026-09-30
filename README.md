@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/assets/longharness-logo.png" width="180" alt="LongHarness Bench logo: documents routed through a language-model harness">
+</p>
+
 # LongHarness Bench: Stress-Testing Language Model Harnesses for Long-Context Reasoning
 
 LongHarness evaluates how language-model harnesses access and reason over long
