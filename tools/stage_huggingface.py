@@ -50,6 +50,7 @@ def main() -> None:
         raise RuntimeError(f"Expected 200 release rows, found {len(rows)}")
 
     copy_as("DATASET_CARD.md", "README.md", destination)
+    copy_as("docs/assets/longharness-logo.png", "assets/longharness-logo.png", destination)
 
     fixed = [
         "RELEASE.json",

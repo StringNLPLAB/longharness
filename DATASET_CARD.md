@@ -20,6 +20,10 @@ tags:
   - arxiv:2609.38137
 ---
 
+<p align="center">
+  <img src="https://huggingface.co/datasets/StringNLP/longharness/resolve/main/assets/longharness-logo.png" width="180" alt="LongHarness Bench logo: documents routed through a language-model harness">
+</p>
+
 # LongHarness Bench: Stress-Testing Language Model Harnesses for Long-Context Reasoning
 
 LongHarness evaluates how language-model harnesses access and reason over long
