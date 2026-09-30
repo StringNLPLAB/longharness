@@ -6,7 +6,7 @@
   <meta name="description" content="LongHarness evaluates the accuracy and efficiency of language-model harnesses on demanding long-context reasoning tasks.">
   <meta name="theme-color" content="#f7f9fc">
   <title>LongHarness Bench | Long-context harness evaluation</title>
-  <link rel="stylesheet" href="style.css?v=24">
+  <link rel="stylesheet" href="style.css?v=27">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -154,7 +154,8 @@
         </div>
 
         <div class="results-tabs" role="tablist" aria-label="Results view" hidden>
-          <button type="button" role="tab" id="results-figure-tab" aria-controls="results-figure-panel" aria-selected="true">Figure</button>
+          <button type="button" role="tab" id="results-figure-tab" aria-controls="results-figure-panel" aria-selected="true">Macro average</button>
+          <button type="button" role="tab" id="results-datasets-tab" aria-controls="results-datasets-panel" aria-selected="false" tabindex="-1">Per dataset</button>
           <button type="button" role="tab" id="results-table-tab" aria-controls="results-table-panel" aria-selected="false" tabindex="-1">Table</button>
         </div>
         <div id="results-figure-panel" role="tabpanel" aria-labelledby="results-figure-tab">
@@ -175,7 +176,7 @@
 
         <figure class="figure-wide" id="results-static-figure">
           <a href="assets/results-overview.svg" target="_blank" rel="noopener" aria-label="Open all 25 model–harness results at full resolution">
-          <img loading="lazy" decoding="async" width="1200" height="600" src="assets/results-overview.svg?v=2" alt="All 25 model–harness combinations plotted by macro-average accuracy and estimated cost. Color identifies each of five models; marker shape identifies direct reading or one of four agent harnesses. Accuracy ranges from 0 to 68 percent, and mean cost ranges from $0.162 to $7.06 per instance.">
+          <img loading="lazy" decoding="async" width="1200" height="600" src="assets/results-overview.svg?v=3" alt="All 25 model–harness combinations plotted by macro-average accuracy and estimated cost. Color identifies each of five models; marker shape identifies direct reading or one of four agent harnesses. Accuracy ranges from 0 to 68 percent, and mean cost ranges from $0.162 to $7.06 per instance.">
           </a>
           <figcaption>
             All 25 evaluated combinations. Each point averages accuracy and estimated cost across the four tasks.
@@ -184,6 +185,45 @@
           </figcaption>
         </figure>
 
+        </div>
+        <div id="results-datasets-panel" role="tabpanel" aria-labelledby="results-datasets-tab">
+          <figure class="results-explorer" id="datasets-explorer" hidden>
+            <div class="chart-legend" aria-label="Select models and harnesses to highlight across all datasets">
+              <div class="legend-row"><span class="legend-label">Model</span><div class="legend-items" id="datasets-model-legend"></div></div>
+              <div class="legend-row"><span class="legend-label">Harness</span><div class="legend-items" id="datasets-harness-legend"></div></div>
+              <div class="legend-selection-controls">
+                <p class="legend-selection-status" role="status">Models: All · Harnesses: All</p>
+                <button type="button" class="legend-reset" disabled>Reset selection</button>
+              </div>
+            </div>
+            <p class="dataset-selection-help">Select multiple models and harnesses to compare their combinations. An unselected row includes all. Selections stay on while you scroll.</p>
+            <p class="dataset-view-note">All 25 configurations on each dataset · 50 instances per dataset · Shared accuracy and cost scales</p>
+            <div class="dataset-plots">
+              <section class="dataset-plot" aria-labelledby="dataset-program-title">
+                <h3 id="dataset-program-title">Program Execution Tracing</h3>
+                <div class="chart-stage" data-suite="program-execution-tracing"></div>
+              </section>
+              <section class="dataset-plot" aria-labelledby="dataset-memos-title">
+                <h3 id="dataset-memos-title">Outlier Memo Detection</h3>
+                <div class="chart-stage" data-suite="outlier-memo-detection"></div>
+              </section>
+              <section class="dataset-plot" aria-labelledby="dataset-constraint-title">
+                <h3 id="dataset-constraint-title">Constraint Solving Search</h3>
+                <div class="chart-stage" data-suite="constraint-solving-search"></div>
+              </section>
+              <section class="dataset-plot" aria-labelledby="dataset-pairs-title">
+                <h3 id="dataset-pairs-title">Equivalent Program Pair Search</h3>
+                <div class="chart-stage" data-suite="equivalent-program-pair-search"></div>
+              </section>
+            </div>
+            <figcaption class="chart-caption"><span>Click legend labels to select or deselect models and harnesses. Reset selection clears all choices. Inspect a point for exact values.</span><a href="assets/results-datasets.svg?v=2" target="_blank" rel="noopener">Static figure ↗</a></figcaption>
+          </figure>
+          <figure class="figure-wide" id="datasets-static-figure">
+            <a href="assets/results-datasets.svg?v=2" target="_blank" rel="noopener" aria-label="Open per-dataset results at full resolution">
+              <img loading="lazy" decoding="async" width="1200" height="820" src="assets/results-datasets.svg?v=2" alt="Four dataset plots: Program Execution Tracing, Outlier Memo Detection, Constraint Solving Search, and Equivalent Program Pair Search. Each shows all 25 configurations on shared accuracy and logarithmic cost axes, with model colors matching the paper and distinct harness shapes.">
+            </a>
+            <figcaption>Each dataset contains 50 instances. All four plots share the same scales; higher and further left is better. <a href="assets/results.json">Download the data</a>.</figcaption>
+          </figure>
         </div>
         <div id="results-table-panel" role="tabpanel" aria-labelledby="results-table-tab">
         <div class="table-header">
@@ -478,7 +518,7 @@
   </footer>
 
   <script src="site.js?v=5"></script>
-  <script src="results-explorer.js?v=3"></script>
+  <script src="results-explorer.js?v=6"></script>
   <script src="task-demos.js?v=2"></script>
 </body>
 </html>

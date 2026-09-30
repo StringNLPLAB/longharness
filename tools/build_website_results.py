@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Rebuild the website's result matrix and plot from docs/assets/results.json.
+"""Rebuild the website's result matrix and plots from docs/assets/results.json.
 
-Requires matplotlib. Data reports the paper's macro-average accuracy and
-estimated mean cost per instance for every evaluated configuration.
+Requires matplotlib. Data transcribes the main results table in the paper's
+sections/results.tex (Constraint, Memos, Program, Pairs, Macro average).
+Model colors match figures/plot_performance_cost_all_suites.py. Both the
+interactive charts and static figures read this same local data file.
 """
 from pathlib import Path
 import html
@@ -24,8 +26,28 @@ ASSETS = ROOT / 'docs/assets'
 DATA = json.loads((ASSETS / 'results.json').read_text())
 HARNESSES = ['Direct', 'RLM', 'OpenCode', 'mini-swe-agent', 'ReAct']
 LABELS = ['Direct', 'RLM', 'Open<wbr>Code', 'mini-swe', 'ReAct']
-COLORS = ['#35557c', '#477cab', '#618d91', '#91aac8', '#69778f']
+COLORS = [row['color'] for row in DATA]
 MARKERS = ['o', 's', '^', 'D', 'P']
+DATASETS = {
+    'program-execution-tracing': 'Program Execution Tracing',
+    'outlier-memo-detection': 'Outlier Memo Detection',
+    'constraint-solving-search': 'Constraint Solving Search',
+    'equivalent-program-pair-search': 'Equivalent Program Pair Search',
+}
+
+
+def validate_data():
+    assert len(DATA) == 5 and len({row['model'] for row in DATA}) == 5
+    for row in DATA:
+        assert re.fullmatch(r'#[0-9a-fA-F]{6}', row['color'])
+        assert [r['harness'] for r in row['results']] == HARNESSES
+        for result in row['results']:
+            assert set(result['datasets']) == set(DATASETS)
+            for metric in [result, *result['datasets'].values()]:
+                assert 0 <= metric['accuracy'] <= 100 and .1 <= metric['cost'] <= 20
+            for metric, tolerance in [('accuracy', .001), ('cost', .005)]:
+                mean = sum(r[metric] for r in result['datasets'].values()) / len(DATASETS)
+                assert abs(mean - result[metric]) <= tolerance, (row['model'], result['harness'], metric)
 
 
 def cell_colors(value, maximum, low, high):
@@ -88,7 +110,7 @@ def build_matrix():
 def build_plot():
     plt.rcParams.update({'font.family':'DejaVu Sans', 'font.size':11, 'text.color':'#314b6c',
                          'axes.labelcolor':'#53677f', 'xtick.color':'#53677f', 'ytick.color':'#53677f',
-                         'svg.fonttype':'path'})
+                         'svg.fonttype':'path', 'svg.hashsalt':'longharness-results'})
     fig, ax = plt.subplots(figsize=(12,6))
     fig.subplots_adjust(left=.08,right=.72,bottom=.16,top=.91)
     ax.set_xscale('log')
@@ -116,8 +138,47 @@ def build_plot():
     plt.close(fig)
 
 
+def build_dataset_plot():
+    fig = plt.figure(figsize=(12, 8.2))
+    grid = fig.add_gridspec(2, 2, left=.075, right=.97, top=.78, bottom=.085,
+                          hspace=.55, wspace=.20)
+    axes = [fig.add_subplot(grid[r, c]) for r in (0, 1) for c in (0, 1)]
+    for ax, (suite, title) in zip(axes, DATASETS.items()):
+        ax.set_xscale('log')
+        ax.set_xlim(.1, 20)
+        ax.set_ylim(-5, 105)
+        ax.set_yticks([0, 25, 50, 75, 100])
+        ax.xaxis.set_major_locator(FixedLocator([.1, .2, .5, 1, 2, 5, 10, 20]))
+        ax.xaxis.set_major_formatter(FuncFormatter(lambda v, _: f'${v:g}'))
+        ax.xaxis.set_minor_locator(FixedLocator([]))
+        ax.set_xlabel('Cost per instance (USD · log scale)', fontsize=10, labelpad=8)
+        ax.set_ylabel('Accuracy (%)', fontsize=10)
+        ax.set_title(title, loc='left', fontsize=12, pad=14, fontweight='medium')
+        ax.grid(color='#e3e9f0', linewidth=.8, zorder=0)
+        for spine in ['top', 'right']: ax.spines[spine].set_visible(False)
+        for spine in ['bottom', 'left']: ax.spines[spine].set_color('#bbc8d7')
+        ax.tick_params(length=0, pad=7, labelsize=9)
+        for row in DATA:
+            for result, marker in zip(row['results'], MARKERS):
+                values = result['datasets'][suite]
+                ax.scatter(values['cost'], values['accuracy'], marker=marker, s=70,
+                           color=row['color'], edgecolor='white', linewidth=.8, zorder=3)
+    models = [Line2D([], [], marker='o', linestyle='', markersize=8, color=row['color'], label=row['model']) for row in DATA]
+    harnesses = [Line2D([], [], marker=m, linestyle='', markersize=8, color='#53677f', label=h if h != 'Direct' else 'Direct reading') for h, m in zip(HARNESSES, MARKERS)]
+    fig.legend(handles=models, loc='upper center', bbox_to_anchor=(.52, .985), ncol=5, frameon=False, fontsize=11)
+    fig.legend(handles=harnesses, loc='upper center', bbox_to_anchor=(.52, .93), ncol=5, frameon=False, fontsize=11)
+    fig.text(.075, .86, 'All 25 configurations · 50 instances per dataset · Shared accuracy and cost scales', fontsize=11, color='#53677f')
+    fig.savefig(ASSETS / 'results-datasets.svg', facecolor='white', metadata={
+        'Date': None, 'Description': 'Four LongHarness dataset plots. All 25 model–harness configurations per plot, with shared accuracy and logarithmic cost scales.'})
+    plt.close(fig)
+
+
 if __name__ == '__main__':
-    assert len(DATA)==5 and all(len(row['results'])==5 for row in DATA)
+    validate_data()
     build_matrix()
     build_plot()
-    print('Built result matrix and accuracy–cost plot for all 25 combinations.')
+    build_dataset_plot()
+    for filename in ('results-overview.svg', 'results-datasets.svg'):
+        path = ASSETS / filename
+        path.write_text('\n'.join(line.rstrip() for line in path.read_text().splitlines()) + '\n')
+    print('Built result matrix, macro plot, and four dataset plots for all 25 combinations.')

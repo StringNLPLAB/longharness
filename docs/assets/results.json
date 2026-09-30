@@ -5,29 +5,120 @@
       {
         "harness": "Direct",
         "accuracy": 60.0,
-        "cost": 0.822
+        "cost": 0.822,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 58.0,
+            "cost": 0.69
+          },
+          "outlier-memo-detection": {
+            "accuracy": 44.0,
+            "cost": 1.17
+          },
+          "program-execution-tracing": {
+            "accuracy": 94.0,
+            "cost": 0.648
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 44.0,
+            "cost": 0.78
+          }
+        }
       },
       {
         "harness": "RLM",
         "accuracy": 53.5,
-        "cost": 4.3
+        "cost": 4.3,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 44.0,
+            "cost": 0.659
+          },
+          "outlier-memo-detection": {
+            "accuracy": 92.0,
+            "cost": 7.23
+          },
+          "program-execution-tracing": {
+            "accuracy": 76.0,
+            "cost": 1.47
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 2.0,
+            "cost": 7.86
+          }
+        }
       },
       {
         "harness": "OpenCode",
         "accuracy": 40.5,
-        "cost": 2.9
+        "cost": 2.9,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 56.0,
+            "cost": 1.72
+          },
+          "outlier-memo-detection": {
+            "accuracy": 10.0,
+            "cost": 3.11
+          },
+          "program-execution-tracing": {
+            "accuracy": 96.0,
+            "cost": 1.37
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 0.0,
+            "cost": 5.41
+          }
+        }
       },
       {
         "harness": "mini-swe-agent",
         "accuracy": 68.0,
-        "cost": 0.816
+        "cost": 0.816,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 42.0,
+            "cost": 0.32
+          },
+          "outlier-memo-detection": {
+            "accuracy": 100.0,
+            "cost": 0.583
+          },
+          "program-execution-tracing": {
+            "accuracy": 88.0,
+            "cost": 1.02
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 42.0,
+            "cost": 1.34
+          }
+        }
       },
       {
         "harness": "ReAct",
         "accuracy": 43.0,
-        "cost": 1.93
+        "cost": 1.93,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 32.0,
+            "cost": 1.4
+          },
+          "outlier-memo-detection": {
+            "accuracy": 6.0,
+            "cost": 2.77
+          },
+          "program-execution-tracing": {
+            "accuracy": 82.0,
+            "cost": 0.866
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 52.0,
+            "cost": 2.68
+          }
+        }
       }
-    ]
+    ],
+    "color": "#2166ac"
   },
   {
     "model": "GLM-5.3",
@@ -35,29 +126,120 @@
       {
         "harness": "Direct",
         "accuracy": 9.5,
-        "cost": 0.948
+        "cost": 0.948,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 0.0,
+            "cost": 0.728
+          },
+          "outlier-memo-detection": {
+            "accuracy": 0.0,
+            "cost": 1.09
+          },
+          "program-execution-tracing": {
+            "accuracy": 38.0,
+            "cost": 0.785
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 0.0,
+            "cost": 1.19
+          }
+        }
       },
       {
         "harness": "RLM",
         "accuracy": 27.0,
-        "cost": 5.48
+        "cost": 5.48,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 34.0,
+            "cost": 2.67
+          },
+          "outlier-memo-detection": {
+            "accuracy": 16.0,
+            "cost": 7.84
+          },
+          "program-execution-tracing": {
+            "accuracy": 58.0,
+            "cost": 3.34
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 0.0,
+            "cost": 8.06
+          }
+        }
       },
       {
         "harness": "OpenCode",
         "accuracy": 38.0,
-        "cost": 3.33
+        "cost": 3.33,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 48.0,
+            "cost": 1.94
+          },
+          "outlier-memo-detection": {
+            "accuracy": 20.0,
+            "cost": 3.52
+          },
+          "program-execution-tracing": {
+            "accuracy": 84.0,
+            "cost": 4.22
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 0.0,
+            "cost": 3.64
+          }
+        }
       },
       {
         "harness": "mini-swe-agent",
         "accuracy": 42.5,
-        "cost": 3.0
+        "cost": 3.0,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 66.0,
+            "cost": 1.55
+          },
+          "outlier-memo-detection": {
+            "accuracy": 58.0,
+            "cost": 3.0
+          },
+          "program-execution-tracing": {
+            "accuracy": 46.0,
+            "cost": 3.65
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 0.0,
+            "cost": 3.8
+          }
+        }
       },
       {
         "harness": "ReAct",
         "accuracy": 13.0,
-        "cost": 3.19
+        "cost": 3.19,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 14.0,
+            "cost": 2.78
+          },
+          "outlier-memo-detection": {
+            "accuracy": 0.0,
+            "cost": 4.12
+          },
+          "program-execution-tracing": {
+            "accuracy": 34.0,
+            "cost": 2.59
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 4.0,
+            "cost": 3.26
+          }
+        }
       }
-    ]
+    ],
+    "color": "#984ea3"
   },
   {
     "model": "Qwen3.8-27B",
@@ -65,29 +247,120 @@
       {
         "harness": "Direct",
         "accuracy": 0.0,
-        "cost": 0.338
+        "cost": 0.338,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 0.0,
+            "cost": 0.356
+          },
+          "outlier-memo-detection": {
+            "accuracy": 0.0,
+            "cost": 0.292
+          },
+          "program-execution-tracing": {
+            "accuracy": 0.0,
+            "cost": 0.363
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 0.0,
+            "cost": 0.341
+          }
+        }
       },
       {
         "harness": "RLM",
         "accuracy": 7.5,
-        "cost": 5.66
+        "cost": 5.66,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 14.0,
+            "cost": 2.5
+          },
+          "outlier-memo-detection": {
+            "accuracy": 2.0,
+            "cost": 7.23
+          },
+          "program-execution-tracing": {
+            "accuracy": 14.0,
+            "cost": 5.78
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 0.0,
+            "cost": 7.13
+          }
+        }
       },
       {
         "harness": "OpenCode",
         "accuracy": 38.5,
-        "cost": 7.06
+        "cost": 7.06,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 46.0,
+            "cost": 6.5
+          },
+          "outlier-memo-detection": {
+            "accuracy": 16.0,
+            "cost": 6.32
+          },
+          "program-execution-tracing": {
+            "accuracy": 92.0,
+            "cost": 8.59
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 0.0,
+            "cost": 6.83
+          }
+        }
       },
       {
         "harness": "mini-swe-agent",
         "accuracy": 33.0,
-        "cost": 5.32
+        "cost": 5.32,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 52.0,
+            "cost": 2.6
+          },
+          "outlier-memo-detection": {
+            "accuracy": 14.0,
+            "cost": 6.54
+          },
+          "program-execution-tracing": {
+            "accuracy": 66.0,
+            "cost": 5.3
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 0.0,
+            "cost": 6.84
+          }
+        }
       },
       {
         "harness": "ReAct",
         "accuracy": 0.0,
-        "cost": 3.87
+        "cost": 3.87,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 0.0,
+            "cost": 3.37
+          },
+          "outlier-memo-detection": {
+            "accuracy": 0.0,
+            "cost": 5.93
+          },
+          "program-execution-tracing": {
+            "accuracy": 0.0,
+            "cost": 1.79
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 0.0,
+            "cost": 4.39
+          }
+        }
       }
-    ]
+    ],
+    "color": "#1b9e77"
   },
   {
     "model": "Gemini 3.8 Flash",
@@ -95,29 +368,120 @@
       {
         "harness": "Direct",
         "accuracy": 10.0,
-        "cost": 0.162
+        "cost": 0.162,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 12.0,
+            "cost": 0.166
+          },
+          "outlier-memo-detection": {
+            "accuracy": 0.0,
+            "cost": 0.158
+          },
+          "program-execution-tracing": {
+            "accuracy": 28.0,
+            "cost": 0.17
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 0.0,
+            "cost": 0.154
+          }
+        }
       },
       {
         "harness": "RLM",
         "accuracy": 10.5,
-        "cost": 0.713
+        "cost": 0.713,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 20.0,
+            "cost": 0.505
+          },
+          "outlier-memo-detection": {
+            "accuracy": 22.0,
+            "cost": 0.729
+          },
+          "program-execution-tracing": {
+            "accuracy": 0.0,
+            "cost": 0.478
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 0.0,
+            "cost": 1.14
+          }
+        }
       },
       {
         "harness": "OpenCode",
         "accuracy": 11.5,
-        "cost": 0.471
+        "cost": 0.471,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 0.0,
+            "cost": 0.439
+          },
+          "outlier-memo-detection": {
+            "accuracy": 28.0,
+            "cost": 0.515
+          },
+          "program-execution-tracing": {
+            "accuracy": 18.0,
+            "cost": 0.478
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 0.0,
+            "cost": 0.452
+          }
+        }
       },
       {
         "harness": "mini-swe-agent",
         "accuracy": 25.0,
-        "cost": 0.55
+        "cost": 0.55,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 4.0,
+            "cost": 0.611
+          },
+          "outlier-memo-detection": {
+            "accuracy": 64.0,
+            "cost": 0.528
+          },
+          "program-execution-tracing": {
+            "accuracy": 32.0,
+            "cost": 0.507
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 0.0,
+            "cost": 0.554
+          }
+        }
       },
       {
         "harness": "ReAct",
         "accuracy": 21.0,
-        "cost": 0.54
+        "cost": 0.54,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 0.0,
+            "cost": 0.428
+          },
+          "outlier-memo-detection": {
+            "accuracy": 30.0,
+            "cost": 0.764
+          },
+          "program-execution-tracing": {
+            "accuracy": 26.0,
+            "cost": 0.428
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 28.0,
+            "cost": 0.538
+          }
+        }
       }
-    ]
+    ],
+    "color": "#d95f02"
   },
   {
     "model": "Kimi-K2.6",
@@ -125,28 +489,119 @@
       {
         "harness": "Direct",
         "accuracy": 0.0,
-        "cost": 0.636
+        "cost": 0.636,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 0.0,
+            "cost": 0.67
+          },
+          "outlier-memo-detection": {
+            "accuracy": 0.0,
+            "cost": 0.546
+          },
+          "program-execution-tracing": {
+            "accuracy": 0.0,
+            "cost": 0.696
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 0.0,
+            "cost": 0.631
+          }
+        }
       },
       {
         "harness": "RLM",
         "accuracy": 0.5,
-        "cost": 6.65
+        "cost": 6.65,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 2.0,
+            "cost": 2.41
+          },
+          "outlier-memo-detection": {
+            "accuracy": 0.0,
+            "cost": 16.3
+          },
+          "program-execution-tracing": {
+            "accuracy": 0.0,
+            "cost": 3.92
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 0.0,
+            "cost": 3.96
+          }
+        }
       },
       {
         "harness": "OpenCode",
         "accuracy": 1.5,
-        "cost": 5.65
+        "cost": 5.65,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 0.0,
+            "cost": 3.86
+          },
+          "outlier-memo-detection": {
+            "accuracy": 0.0,
+            "cost": 5.64
+          },
+          "program-execution-tracing": {
+            "accuracy": 6.0,
+            "cost": 8.99
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 0.0,
+            "cost": 4.1
+          }
+        }
       },
       {
         "harness": "mini-swe-agent",
         "accuracy": 0.5,
-        "cost": 4.03
+        "cost": 4.03,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 0.0,
+            "cost": 3.15
+          },
+          "outlier-memo-detection": {
+            "accuracy": 0.0,
+            "cost": 4.22
+          },
+          "program-execution-tracing": {
+            "accuracy": 2.0,
+            "cost": 5.08
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 0.0,
+            "cost": 3.65
+          }
+        }
       },
       {
         "harness": "ReAct",
         "accuracy": 0.0,
-        "cost": 2.86
+        "cost": 2.86,
+        "datasets": {
+          "constraint-solving-search": {
+            "accuracy": 0.0,
+            "cost": 3.14
+          },
+          "outlier-memo-detection": {
+            "accuracy": 0.0,
+            "cost": 2.72
+          },
+          "program-execution-tracing": {
+            "accuracy": 0.0,
+            "cost": 3.42
+          },
+          "equivalent-program-pair-search": {
+            "accuracy": 0.0,
+            "cost": 2.16
+          }
+        }
       }
-    ]
+    ],
+    "color": "#c64b75"
   }
 ]
